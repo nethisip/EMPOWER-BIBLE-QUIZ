@@ -197,7 +197,7 @@ export const QUESTIONS: Question[] = [
 export const INITIAL_TEAMS: Team[] = [
   { id: "blue", name: "Blue Team", color: "#3B82F6", score: 0 },
   { id: "red", name: "Red Team", color: "#EF4444", score: 0 },
-  { id: "yellow", name: "Yellow Team", color: "#F59E0B", score: 0 },
+  { id: "yellow", name: "Yellow Team", color: "#FFD700", score: 0 },
   { id: "green", name: "Green Team", color: "#10B981", score: 0 },
   { id: "orange", name: "Orange Team", color: "#F97316", score: 0 },
   { id: "violet", name: "Violet Team", color: "#8B5CF6", score: 0 },
