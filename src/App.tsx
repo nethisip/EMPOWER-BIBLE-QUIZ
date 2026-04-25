@@ -142,7 +142,7 @@ export default function App() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-[800px] w-full bg-white text-black p-6 md:p-10 text-center border-[8px] border-black shadow-[12px_12px_0px_0px_rgba(239,68,68,1)] relative z-10"
+          className="max-w-[90%] w-full bg-white text-black p-6 md:p-10 text-center border-[8px] border-black shadow-[12px_12px_0px_0px_rgba(239,68,68,1)] relative z-10"
         >
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-0.5 bg-black flex-1"></div>
@@ -202,7 +202,7 @@ export default function App() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-[600px] w-full bg-white border-[6px] border-gold p-6 text-center shadow-[10px_10px_0px_0px_rgba(239,68,68,1)]"
+          className="max-w-[90%] w-full bg-white border-[6px] border-gold p-6 text-center shadow-[10px_10px_0px_0px_rgba(239,68,68,1)]"
         >
           <Trophy className="w-12 h-12 text-red-600 mx-auto mb-3" />
           <h2 className="text-3xl font-black text-black mb-1 uppercase tracking-tighter italic leading-none">Victory Decided</h2>
@@ -275,7 +275,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-6 p-4 lg:p-6 max-w-[1200px] mx-auto w-full relative">
+      <main className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-6 p-4 lg:p-6 max-w-[90%] mx-auto w-full relative">
         
         {/* Left Column: The Action Board */}
         <div className="md:col-span-8 flex flex-col gap-6">
@@ -308,12 +308,12 @@ export default function App() {
                   animate={{ opacity: 1, y: 0 }}
                   className="w-full flex flex-col items-center"
                 >
-                  <h2 className="text-3xl md:text-5xl font-black leading-[0.9] tracking-tighter mb-8 uppercase italic break-words max-w-4xl">
+                  <h2 className="text-3xl md:text-5xl font-black leading-[0.9] tracking-tighter mb-8 uppercase italic break-words max-w-[95%]">
                     {currentQuestion.text}
                   </h2>
 
                   {/* Multiple Choice Options - Revealed Staggered */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-4xl mb-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-[95%] mb-6">
                     {currentQuestion.options.map((option, idx) => (
                       <motion.div
                         key={idx}
@@ -339,7 +339,7 @@ export default function App() {
                   {!showAnswer ? (
                     <button 
                       onClick={() => { setShowAnswer(true); setIsTimerRunning(false); }}
-                      className="group relative flex items-center justify-center gap-4 bg-black text-white p-6 md:p-8 text-2xl font-black hover:bg-gold hover:text-black transition-all uppercase italic tracking-[0.1em] w-full max-w-4xl shadow-[8px_8px_0px_0px_rgba(239,68,68,1)]"
+                      className="group relative flex items-center justify-center gap-4 bg-black text-white p-6 md:p-8 text-2xl font-black hover:bg-gold hover:text-black transition-all uppercase italic tracking-[0.1em] w-full max-w-[95%] shadow-[8px_8px_0px_0px_rgba(239,68,68,1)]"
                     >
                       ANSWER <CheckCircle2 className="w-8 h-8 stroke-[4]" />
                     </button>
@@ -347,7 +347,7 @@ export default function App() {
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="bg-red-600 text-white p-6 md:p-10 border-[6px] border-black shadow-[10px_10px_0px_0px_rgba(212,175,55,1)] w-full max-w-4xl relative"
+                      className="bg-red-600 text-white p-6 md:p-10 border-[6px] border-black shadow-[10px_10px_0px_0px_rgba(212,175,55,1)] w-full max-w-[95%] relative"
                     >
                        <div className="absolute -top-4 -left-4 bg-gold text-black px-3 py-0.5 font-black uppercase text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">Correct!</div>
                        <p className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none italic">{currentQuestion.answer}</p>
