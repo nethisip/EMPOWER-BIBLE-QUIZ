@@ -40,7 +40,7 @@ export default function App() {
   const countdownRef = useRef<NodeJS.Timeout | null>(null);
 
   const levelQuestions = QUESTIONS.filter(q => q.level === selectedLevel);
-  const currentQuestion = levelQuestions[currentQuestionIndex];
+  const currentQuestion = levelQuestions[currentQuestionIndex] || levelQuestions[0] || QUESTIONS[0];
 
   // Main Timer Logic
   useEffect(() => {
@@ -171,7 +171,7 @@ export default function App() {
                 className="group relative border-[4px] border-black p-4 bg-white hover:bg-black transition-all text-center flex flex-col items-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1"
               >
                 <span className="text-[10px] font-black text-red-600 group-hover:text-gold uppercase mb-1">Level 0{lv}</span>
-                <span className="text-xl font-black group-hover:text-white uppercase transition-colors italic">{lv === 1 ? 'EASY' : lv === 2 ? 'HARD' : 'ELITE'}</span>
+                <span className="text-xl font-black group-hover:text-white uppercase transition-colors italic">{lv === 1 ? 'EASY' : lv === 2 ? 'MEDIUM' : 'HARD'}</span>
                 <Play className="mt-2 w-5 h-5 text-black group-hover:text-red-600 transition-colors" />
               </button>
             ))}
@@ -308,33 +308,35 @@ export default function App() {
                   animate={{ opacity: 1, y: 0 }}
                   className="w-full flex flex-col items-center"
                 >
-                  <h2 className="text-3xl md:text-5xl font-black leading-[0.9] tracking-tighter mb-8 uppercase italic break-words max-w-[95%]">
+                  <h2 className="text-4xl md:text-7xl font-black leading-[0.9] tracking-tighter mb-12 uppercase italic break-words max-w-[95%]">
                     {currentQuestion.text}
                   </h2>
 
                   {/* Multiple Choice Options - Revealed Staggered */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-[95%] mb-6">
-                    {currentQuestion.options.map((option, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -15 }}
-                        animate={showOptions ? { opacity: 1, x: 0 } : {}}
-                        transition={{ delay: idx * 0.3 }}
-                        className={`
-                          flex items-center gap-4 p-4 border-[3px] border-black bg-white text-left transition-all
-                          ${showAnswer && option === currentQuestion.answer ? 'bg-red-600 border-gold text-white scale-[1.03] z-10 shadow-[6px_6px_0px_0px_rgba(212,175,55,1)]' : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)]'}
-                        `}
-                      >
-                        <span className={`
-                          w-10 h-10 flex-shrink-0 flex items-center justify-center text-lg font-black border-2 border-black
-                          ${showAnswer && option === currentQuestion.answer ? 'bg-gold text-black' : 'bg-black text-white'}
-                        `}>
-                          {String.fromCharCode(65 + idx)}
-                        </span>
-                        <span className="text-xl md:text-2xl font-black uppercase tracking-tight leading-none italic">{option}</span>
-                      </motion.div>
-                    ))}
-                  </div>
+                  {currentQuestion.options.length > 0 && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[95%] mb-8">
+                      {currentQuestion.options.map((option, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, x: -15 }}
+                          animate={showOptions ? { opacity: 1, x: 0 } : {}}
+                          transition={{ delay: idx * 0.3 }}
+                          className={`
+                            flex items-center gap-6 p-6 border-[4px] border-black bg-white text-left transition-all
+                            ${showAnswer && option === currentQuestion.answer ? 'bg-red-600 border-gold text-white scale-[1.03] z-10 shadow-[8px_8px_0px_0px_rgba(212,175,55,1)]' : 'shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)]'}
+                          `}
+                        >
+                          <span className={`
+                            w-12 h-12 flex-shrink-0 flex items-center justify-center text-2xl font-black border-2 border-black
+                            ${showAnswer && option === currentQuestion.answer ? 'bg-gold text-black' : 'bg-black text-white'}
+                          `}>
+                            {String.fromCharCode(65 + idx)}
+                          </span>
+                          <span className="text-2xl md:text-4xl font-black uppercase tracking-tight leading-none italic">{option}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
 
                   {!showAnswer ? (
                     <button 
@@ -347,10 +349,10 @@ export default function App() {
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="bg-red-600 text-white p-6 md:p-10 border-[6px] border-black shadow-[10px_10px_0px_0px_rgba(212,175,55,1)] w-full max-w-[95%] relative"
+                      className="bg-red-600 text-white p-10 md:p-14 border-[8px] border-black shadow-[12px_12px_0px_0px_rgba(212,175,55,1)] w-full max-w-[95%] relative"
                     >
-                       <div className="absolute -top-4 -left-4 bg-gold text-black px-3 py-0.5 font-black uppercase text-sm shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">Correct!</div>
-                       <p className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none italic">{currentQuestion.answer}</p>
+                       <div className="absolute -top-6 -left-6 bg-gold text-black px-4 py-1 font-black uppercase text-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">Correct!</div>
+                       <p className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none italic">{currentQuestion.answer}</p>
                     </motion.div>
                   )}
                 </motion.div>
